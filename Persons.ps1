@@ -6,7 +6,7 @@ Function Get-ManagerId{
     return $managerId.ManagerId;
 }
 
-$persons = Import-CSV -Path "C:\Program Files\Tools4ever\Visma\visma.csv" | Where {($_.werknemersgroep -ne 'Vrijwilliger' -and  $_.werknemersgroep -ne 'Artiest')}
+$persons = Import-CSV -Path "C:\Program Files\Tools4ever\Visma\visma.csv" | Where-Object {($_.werknemersgroep -ne 'Vrijwilliger' -and  $_.werknemersgroep -ne 'Artiest')}
 
 $personList = [System.Collections.ArrayList]@()
 
