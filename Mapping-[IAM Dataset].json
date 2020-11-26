@@ -1,0 +1,230 @@
+{
+	"personMappings": [
+		{
+			"name": "Contact.Business.Email",
+			"mode": "field",
+			"value": "u_emailaddress",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Contact.Business.Phone.Fixed",
+			"mode": "field",
+			"value": "tp_phone",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Custom.RoomNumber",
+			"mode": "field",
+			"value": "tp_roomnr",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.BirthDate",
+			"mode": "field",
+			"value": "dat_geb",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.BirthLocality",
+			"mode": "field",
+			"value": "geb_plaats",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.Gender",
+			"mode": "complex",
+			"value": "function getGender() {\r\n    if (source.geslacht == \"M\") {\r\n        return \"M\"\r\n    } else {\r\n        return \"F\"\r\n    }\r\n}\r\n\r\ngetGender()",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.HonorificPrefix",
+			"mode": "field",
+			"value": "k_titel_aanhef",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "field",
+			"value": "ExternalId",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.Convention",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    if(source.k_naamgebruik == \"P\") {\r\n        return \"P\";\r\n    }\r\n    if(source.k_naamgebruik == \"E\") {\r\n        return \"B\";\r\n    }\r\n    if(source.k_naamgebruik == \"B\") {\r\n        return \"PB\";\r\n    }\r\n    if(source.k_naamgebruik == \"C\") {\r\n        return \"BP\";\r\n    }\r\n}\r\n\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.FamilyName",
+			"mode": "field",
+			"value": "naam",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartner",
+			"mode": "field",
+			"value": "pp_naam",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartnerPrefix",
+			"mode": "field",
+			"value": "pp_voorv",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePrefix",
+			"mode": "field",
+			"value": "voorv",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.GivenName",
+			"mode": "field",
+			"value": "voorn",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.Initials",
+			"mode": "field",
+			"value": "voorl",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.NickName",
+			"mode": "field",
+			"value": "roepnaam",
+			"validation": {
+				"required": false
+			}
+		}
+	],
+	"contractMappings": [
+		{
+			"name": "CostCenter.ExternalId",
+			"mode": "field",
+			"value": "costCenter",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Department.ExternalId",
+			"mode": "field",
+			"value": "OrgUnitID",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Details.Fte",
+			"mode": "field",
+			"value": "PercentPosition",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "EndDate",
+			"mode": "field",
+			"value": "DateTo",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "complex",
+			"value": "sourceContract.combined_id + \"-\" + sourceContract.ContractID + \"-\" + sourceContract.SubContractID + \"-\" + sourceContract.DateFrom + \"-\" + sourceContract.DateTo",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Location.ExternalId",
+			"mode": "field",
+			"value": "UDFString1",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Organization.ExternalId",
+			"mode": "field",
+			"value": "bed_id",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Organization.Name",
+			"mode": "field",
+			"value": "OrganizationName",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "StartDate",
+			"mode": "field",
+			"value": "DateFrom",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Title.ExternalId",
+			"mode": "field",
+			"value": "FunctionID",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Title.Name",
+			"mode": "field",
+			"value": "FunctionName",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Type.Description",
+			"mode": "field",
+			"value": "et_desc",
+			"validation": {
+				"required": false
+			}
+		}
+	]
+}
