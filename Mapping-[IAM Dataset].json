@@ -17,14 +17,6 @@
 			}
 		},
 		{
-			"name": "Custom.RoomNumber",
-			"mode": "field",
-			"value": "tp_roomnr",
-			"validation": {
-				"required": false
-			}
-		},
-		{
 			"name": "Details.BirthDate",
 			"mode": "field",
 			"value": "dat_geb",
