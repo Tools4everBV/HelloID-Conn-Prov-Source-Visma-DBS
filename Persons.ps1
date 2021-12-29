@@ -40,8 +40,73 @@ Foreach ($person in $persons) {
     if ($person.UniqueID -notin $personList.UniqueID) {
 
         $personObject = $person | Select-Object -Property UniqueID, wns_id, bed_id, voorl, roepnaam, voorv, geboortenaam, voorvpartner, naampartner, k_naamgebruik, dat_geb, geslacht -Unique ;
-        $personObject | Add-Member -Name "ExternalId" -MemberType NoteProperty -Value $person.wns_id;
-        $personObject | Add-Member -Name "DisplayName" -MemberType NoteProperty -Value $person.geboortenaam;
+        $externalID = "$($person.wns_id)".trim()
+        $firstName = "$($person.roepnaam)".trim()
+        $prefix = "$($person.voorv)".trim()
+        $lastName = "$($person.geboortenaam)".trim()
+        $partnerPrefix = "$($person.voorvpartner)".trim()
+        $partnerLastname = "$($person.naampartner)".trim()
+        
+        $nameConvention = $person.k_naamgebruik.Code
+        switch($nameConvention){
+            'E' {
+                # Birthname
+                $displayName = $firstName
+    
+                if(-not[String]::IsNullOrEmpty($prefix)){ $displayName = $displayName + " " + $prefix }
+                $displayName = $displayName + " " + $lastName
+    
+                $displayName = $displayName + " " + "($externalID)"
+            }
+            'B' {
+                # Partnername - Birthname
+                $displayName = $firstName
+    
+                if(-not[String]::IsNullOrEmpty($partnerPrefix)){ $displayName = $displayName + " " + $partnerPrefix }
+                $displayName = $displayName + " " + $partnerLastname
+    
+                $displayName = $displayName + " -"
+    
+                if(-not[String]::IsNullOrEmpty($prefix)){ $displayName = $displayName + " " + $prefix }
+                $displayName = $displayName + " " + $lastName
+    
+                $displayName = $displayName + " " + "($externalID)"
+            }
+            'P' {
+                # Partnername
+                $displayName = $firstName
+    
+                if(-not[String]::IsNullOrEmpty($partnerPrefix)){ $displayName = $displayName + " " + $partnerPrefix }
+                $displayName = $displayName + " " + $partnerLastname
+    
+                $displayName = $displayName + " " + "($externalID)"         
+            }
+            'C' {
+                # # Birthname - Partnername
+                $displayName = $firstName
+    
+                if(-not[String]::IsNullOrEmpty($prefix)){ $displayName = $displayName + " " + $prefix }
+                $displayName = $displayName + " " + $lastName
+    
+                $displayName = $displayName + " -"
+    
+                if(-not[String]::IsNullOrEmpty($partnerPrefix)){ $displayName = $displayName + " " + $partnerPrefix }
+                $displayName = $displayName + " " + $partnerLastname                    
+    
+                $displayName = $displayName + " " + "($externalID)"
+            }
+            default {
+                # Birthname
+                $displayName = $firstName
+    
+                if(-not[String]::IsNullOrEmpty($prefix)){ $displayName = $displayName + " " + $prefix }
+                $displayName = $displayName + " " + $lastName
+    
+                $displayName = $displayName + " " + "($externalID)"        
+            }
+        }
+        $personObject | Add-Member -Name "ExternalId" -MemberType NoteProperty -Value $externalID;
+        $personObject | Add-Member -Name "DisplayName" -MemberType NoteProperty -Value $displayName;
 
         $contractObject = $person | Select-Object  -Property wns_id, functienr, functienaam, description, deskundigheid, aanvang_dvb_plan, einde_dvb_plan, aanvang_functie_plan, einde_functie_plan, afd_nr, afd_naam, costcenter, costcenter_name, Division, ManagerLoginName, ManagerEmailAddress, dvb_id_actief, dvb_id, con_id, con_id_hfd, werknemersgroep, uren, aanvang_functie, einde_functie, aanvang_adres, einde_adres, aanvang_contract, einde_contract, BIG_nummer, Locatie -Unique;
       
